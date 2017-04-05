@@ -8,37 +8,38 @@ package com.ea.messagelibrary.messageDistribute;
 
 public class SCSender{
 
-    SCMessage message = null;
+    public static void sendEmptyMessage()
 
-    public void sendMessage(SCMothed mothed, SCLinkedMap parameters) {
-        message = createMessage(mothed,parameters);
-        distribute(message);
-    }
-    public void sendError(SCMothed mothed,SCIResponder responder,String errorCause){
-        message = createMessage(mothed,null);
+    public static void sendMessage(SCMothed mothed,SCIResponder responder,SCLinkedMap parameters){
+        if(SCLooper.isWorking){
+            SCLooper looper = SCLooper.getInstance();
+            looper.initLooper();
+        }
+        SCMessage message = createMessage(mothed,parameters);
         message.setResponder(responder);
-        message.setError(SCMessage.Error.MESSAGE_ERROR_RUNTIME);
-        message.setErrorCause(errorCause);
-        distribute(message);
-    }
-    public void sendMessage(SCMothed mothed,SCIResponder responder,SCLinkedMap parameters){
-        message = createMessage(mothed,parameters);
-        message.setResponder(responder);
-        distribute(message);
+        enqueueMessage(message);
     }
 
-    synchronized private SCMessage createMessage(SCMothed mothed, SCLinkedMap parameters){
+    synchronized private static SCMessage createMessage(SCMothed mothed, SCLinkedMap parameters){
         return SCMessageFactory.createMessage(mothed,parameters);
     }
 
-    private void distribute(SCMessage message){
-        if(message.getResponder()!=null){  //获取响应者
-            SCIResponder responder = message.getResponder();
-            responder.reciveMessage(message);
-        }
-        else{                             //设置无响应者错误错误
-            message.setError(SCMessage.Error.MESSAGE_ERROR_NORESPONDER);
+    private static void enqueueMessage(SCMessage message){
+        SCMessageQueue.insertIntoMessageQueue(message);
+    }
+
+    public static void distributeMessage(SCMessage message){
+        switch (message.getThreadMode()){
+            case MAIN:
+                break;
+            case LOCAL:
+                break;
+            case NEW:
+                break;
+            default:
+                break;
         }
     }
+
 }
 
