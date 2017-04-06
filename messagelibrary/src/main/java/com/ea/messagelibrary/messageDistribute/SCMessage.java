@@ -1,34 +1,31 @@
 package com.ea.messagelibrary.messageDistribute;
 
+import java.io.Serializable;
 
 /**
  * Created by atong on 2016/11/7.
  */
 
-public class SCMessage {
+public class SCMessage implements Serializable {
 
-
-    private SCThreadMode    threadMode;           //消息类型
     private SCLinkedMap     parameters;          //携带的数据
     private String          tag;
 
     public SCLinkedMap getParameters(){
         return parameters;
     }
-    public SCThreadMode getThreadMode(){
-        return threadMode;
-    }
+    public String getTag(){return tag;}
     /**
      * 构造函数
      */
-    public SCMessage(SCThreadMode threadMode, SCLinkedMap parameters){
-        init(threadMode, parameters);
+    public SCMessage(String tag, SCLinkedMap parameters){
+        init(tag, parameters);
     }
     /**
      * 初始化函数
      */
-    public void init(SCThreadMode threadMode, SCLinkedMap parameters){
-        this.threadMode = threadMode;
+    public void init(String tag,SCLinkedMap parameters){
+        this.tag = tag;
         this.parameters = parameters;
     }
 

@@ -1,25 +1,27 @@
 package com.ea.messagelibrary.messageDistribute;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
+
 /**
- * Created by yangzikang on 17-4-5.
+ * Created by yangzikang on 2017/4/6.
  */
 
 public class SCMessageQueue {
-    private static List<SCMessage> messages = new ArrayList<SCMessage>();
+    public static List<SCMessage> queue = new LinkedList<>();
+    public static void add(SCMessage message){
+        queue.add(message);
+        if(!SCLooper.isWorking){
+            SCLooper looper = SCLooper.getInstance();
+            looper.notifyLooper();
+        }
+    }
+    public static SCMessage remove(){
+        return  queue.remove(0);
+    }
 
     public static boolean isEmpty(){
-        return messages.isEmpty();
+        return  queue.isEmpty();
     }
-
-    public static void insertIntoMessageQueue(SCMessage message){
-        messages.add(message);
-
-    }
-    public static SCMessage removeFromMessageQueue(){
-        return messages.remove(0);
-    }
-
 }

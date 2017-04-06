@@ -1,5 +1,6 @@
 package com.ea.messagelibrary.messageDistribute;
 
+
 /**
  * Created by atong on 2016/12/13.
  *
@@ -8,37 +9,32 @@ package com.ea.messagelibrary.messageDistribute;
 
 public class SCSender{
 
-    public static void sendEmptyMessage()
-
-    public static void sendMessage(SCMothed mothed,SCIResponder responder,SCLinkedMap parameters){
-        if(SCLooper.isWorking){
-            SCLooper looper = SCLooper.getInstance();
-            looper.initLooper();
-        }
-        SCMessage message = createMessage(mothed,parameters);
-        message.setResponder(responder);
+    public static void sendMessage(){
+        SCMessage message = SCMessageFactory.createMessage("",null);
         enqueueMessage(message);
     }
+    public static void sendMessage(SCLinkedMap parameters){
+        SCMessage message = SCMessageFactory.createMessage("",parameters);
+        enqueueMessage(message);
+    }
+    public static void sendMessage(String tag){
+        SCMessage message = SCMessageFactory.createMessage(tag,null);
+        enqueueMessage(message);
+    }
+    public static void sendMessage(String tag,SCLinkedMap parameters){
 
-    synchronized private static SCMessage createMessage(SCMothed mothed, SCLinkedMap parameters){
-        return SCMessageFactory.createMessage(mothed,parameters);
+        SCMessage message = SCMessageFactory.createMessage(tag,parameters);
+        enqueueMessage(message);
+
     }
 
-    private static void enqueueMessage(SCMessage message){
-        SCMessageQueue.insertIntoMessageQueue(message);
-    }
+    synchronized private static SCMessage createMessage(String tag, SCLinkedMap parameters){
 
-    public static void distributeMessage(SCMessage message){
-        switch (message.getThreadMode()){
-            case MAIN:
-                break;
-            case LOCAL:
-                break;
-            case NEW:
-                break;
-            default:
-                break;
-        }
+        return SCMessageFactory.createMessage(tag,parameters);
+
+    }
+    public static void enqueueMessage(SCMessage message){
+        SCMessageQueue.add(message);
     }
 
 }
