@@ -80,7 +80,9 @@ public class SCLooper implements Runnable{
                     SCHandler.getInstance().sendMessage(m);
 
                     break;
-                case NEWTHREAD: break;
+                case NEWTHREAD:
+                    new Thread(new SCNewThread(responser,message)).start();
+                    break;
                 case SENDTHREAD: break;
                 default: break;
             }
