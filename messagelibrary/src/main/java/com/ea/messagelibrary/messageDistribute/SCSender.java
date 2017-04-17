@@ -10,25 +10,23 @@ package com.ea.messagelibrary.messageDistribute;
 public class SCSender{
 
     public static void sendMessage(){
-        SCMessage message = SCMessageFactory.createMessage("",null);
+        SCMessage message = createMessage("",null);
         enqueueMessage(message);
     }
     public static void sendMessage(SCLinkedMap parameters){
-        SCMessage message = SCMessageFactory.createMessage("",parameters);
+        SCMessage message = createMessage("",parameters);
         enqueueMessage(message);
     }
     public static void sendMessage(String tag){
-        SCMessage message = SCMessageFactory.createMessage(tag,null);
+        SCMessage message = createMessage(tag,null);
         enqueueMessage(message);
     }
     public static void sendMessage(String tag,SCLinkedMap parameters){
-
-        SCMessage message = SCMessageFactory.createMessage(tag,parameters);
+        SCMessage message = createMessage(tag,parameters);
         enqueueMessage(message);
-
     }
 
-    synchronized private static SCMessage createMessage(String tag, SCLinkedMap parameters){
+    private static SCMessage createMessage(String tag, SCLinkedMap parameters){
 
         return SCMessageFactory.createMessage(tag,parameters);
 

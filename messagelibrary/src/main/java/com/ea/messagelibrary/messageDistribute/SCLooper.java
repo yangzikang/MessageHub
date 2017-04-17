@@ -16,24 +16,15 @@ import android.widget.Switch;
 
 public class SCLooper implements Runnable{
     private static SCLooper looper = new SCLooper();
-    private SCLooper(){
-        loopThread = new Thread(this);
-        loopThread.start();
-        isWorking = true;
-    }
-    private Thread loopThread;
-
-    public static boolean isWorking = false;
-
-    public Object lock = "";//只为了锁线程
-
+    private SCLooper(){}
     public static SCLooper getInstance(){
         return looper;
     }
+    private Thread loopThread = new Thread(this);
 
-    synchronized public void notifyLooper(){
-        if(isWorking == false) {
-            loopThread.notify();
+    public void loop(){
+        if(!loopThread.isAlive()){
+            loopThread.start();
         }
     }
 
@@ -41,20 +32,7 @@ public class SCLooper implements Runnable{
     @Override
     public void run() {
         while(true){
-            if(SCMessageQueue.isEmpty()){
-                synchronized (lock){
-                    try {
-                        loopThread.wait();
-                        isWorking =false;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                        loopThread = new Thread(this);
-                        loopThread.start();
-                        isWorking = true;
-                    }
-                }
-            }
-            else{
+            if(!SCMessageQueue.isEmpty()){
                 SCMessage message = SCMessageQueue.remove();
                 distributeMessage(message);
             }
@@ -62,16 +40,14 @@ public class SCLooper implements Runnable{
 
     }
 
-    private void distributeMessage(SCMessage message){
+    synchronized private void distributeMessage(SCMessage message){
         SCResponser responser = SCResponser.relationShip.get(message.getTag());
         if (responser==null){
             SCMessageQueue.add(message);
-            Log.d("llll","no tag");
         }
         else{
             switch(responser.getThreadModeType()){
                 case MAINTHREAD:
-                    Log.d("llll","shdus");
                     Message m = new Message();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("message", message);
@@ -83,7 +59,6 @@ public class SCLooper implements Runnable{
                 case NEWTHREAD:
                     new Thread(new SCNewThread(responser,message)).start();
                     break;
-                case SENDTHREAD: break;
                 default: break;
             }
         }

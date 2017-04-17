@@ -24,12 +24,10 @@ public abstract class SCResponser implements Serializable{
     }
 
     public void register(Object receiver){
-        Log.d("llllll","dioayong");
         Class<?> clazz = receiver.getClass();
         for(Field m :clazz.getFields()){
             Tag tag =  m.getAnnotation(Tag.class);
             if(tag !=null){
-                Log.d("lllllll",m.getName()+ tag.tag()+tag.threadMode());
                 tagName = tag.tag();
                 threadModeType = tag.threadMode();
                 relationShip.put(tagName,this);

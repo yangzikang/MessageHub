@@ -5,5 +5,5 @@ package com.ea.messagelibrary.messageDistribute;
  */
 
 public enum SCThreadModeType {
-    MAINTHREAD,SENDTHREAD,NEWTHREAD;
+    MAINTHREAD,NEWTHREAD;
 }

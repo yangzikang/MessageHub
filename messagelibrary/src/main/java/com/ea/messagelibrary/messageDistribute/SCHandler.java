@@ -20,10 +20,10 @@ public class SCHandler extends Handler{
         super(looper);
 
     }
+
     @Override
     public void handleMessage(Message msg) {
         super.handleMessage(msg);
-        Log.d("lll","ggggg");
         //update UI
         SCMessage message =(SCMessage)msg.getData().getSerializable("message");
         SCResponser responser  =(SCResponser)msg.getData().getSerializable("responser");

@@ -1,5 +1,7 @@
 package com.ea.messagehub;
 
+import android.os.Looper;
+
 import com.ea.messagelibrary.messageDistribute.SCResponser;
 import com.ea.messagelibrary.messageDistribute.Tag;
 
