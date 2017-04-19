@@ -15,6 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        
+        <intent-filter android:priority="1000"> <!-- 设置最高优先级 -->
+            <action android:name="com.xiazdong"/>
+        </intent-filter>
     </application>
 
 </manifest>

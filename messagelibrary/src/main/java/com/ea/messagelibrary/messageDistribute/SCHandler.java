@@ -7,6 +7,7 @@ import android.util.Log;
 
 /**
  * Created by yangzikang on 2017/4/6.
+ * 继承Handler实现消息对主线程的分发
  */
 
 public class SCHandler extends Handler{

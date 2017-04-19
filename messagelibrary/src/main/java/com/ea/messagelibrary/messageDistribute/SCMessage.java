@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by atong on 2016/11/7.
+ * 消息实体 带参数和标识，其中参数用自己的MAP
  */
 
 public class SCMessage implements Serializable {

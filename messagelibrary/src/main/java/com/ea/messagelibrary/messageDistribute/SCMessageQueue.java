@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by yangzikang on 2017/4/6.
+ * 消息队列，有唤醒Looper的能力
  */
 
 public class SCMessageQueue {

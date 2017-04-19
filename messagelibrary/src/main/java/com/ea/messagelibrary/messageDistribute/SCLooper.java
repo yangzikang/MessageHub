@@ -12,6 +12,8 @@ import android.widget.Switch;
 
 /**
  * Created by yangzikang on 2017/4/6.
+ *
+ * SCLooper用来在新线程遍历MessageQueue，如果不为空则分发，如果为空阻塞等待唤醒（待实现）
  */
 
 public class SCLooper implements Runnable{

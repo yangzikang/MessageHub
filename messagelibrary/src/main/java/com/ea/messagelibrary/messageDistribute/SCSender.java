@@ -4,7 +4,7 @@ package com.ea.messagelibrary.messageDistribute;
 /**
  * Created by atong on 2016/12/13.
  *
- * 通用入口 组装消息，通过MessageFactory生产消息,交由控制台分发
+ * 通用入口 组装消息，通过MessageFactory生产消息,交由MessageQueue（消息添加的过程）
  */
 
 public class SCSender{

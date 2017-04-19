@@ -11,11 +11,13 @@ import java.util.Map;
 
 /**
  * Created by yangzikang on 2017/4/5.
+ * 响应者类，维护一个静态的MAP，用来存放它的对象
  */
 
 public abstract class SCResponser implements Serializable{
     private String tagName;
     private SCThreadModeType threadModeType;
+
 
     public static Map<String , SCResponser> relationShip = new HashMap<>();
 

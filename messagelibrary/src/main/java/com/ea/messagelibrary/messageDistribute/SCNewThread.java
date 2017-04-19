@@ -2,6 +2,7 @@ package com.ea.messagelibrary.messageDistribute;
 
 /**
  * Created by yangzikang on 2017/4/11.
+ * 在新线程分发时使用
  */
 
 public class SCNewThread implements Runnable {

@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity{
         @Override
         public void onReceive(SCMessage message) {
             Date date = new Date();
-
             textView.setText(date.toString());
         }
     };
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         textView = (TextView)findViewById(R.id.text);
         button = (Button)findViewById(R.id.button);
-
 
         responser.register(this);
 
@@ -51,5 +49,6 @@ public class MainActivity extends AppCompatActivity{
 
 
     }
+
 
 }
