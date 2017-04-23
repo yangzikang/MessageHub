@@ -1,6 +1,8 @@
 package com.ea.messagelibrary.messageDistribute;
 
 
+import android.os.Looper;
+
 /**
  * Created by atong on 2016/12/13.
  *
@@ -27,7 +29,8 @@ public class SCSender{
     }
 
     private static SCMessage createMessage(String tag, SCLinkedMap parameters){
-
+        //做一下线程选择
+        //还未实现
         return SCMessageFactory.createMessage(tag,parameters);
 
     }
