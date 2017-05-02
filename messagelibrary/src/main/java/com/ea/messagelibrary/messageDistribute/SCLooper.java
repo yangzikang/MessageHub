@@ -43,6 +43,7 @@ public class SCLooper implements Runnable{
     }
 
     synchronized private void distributeMessage(SCMessage message){
+        Handler mHandler;
         SCResponser responser = SCResponser.relationShip.get(message.getTag());
         if (responser==null){
             SCMessageQueue.add(message);
@@ -50,17 +51,17 @@ public class SCLooper implements Runnable{
         else{
             switch(responser.getThreadModeType()){
                 case MAINTHREAD:
-                    Message m = new Message();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("message", message);
-                    bundle.putSerializable("responser",responser);
-                    m.setData(bundle);
-                    SCHandler.getInstance().sendMessage(m);
-
+                    mHandler = SCHandlerFactory.createHandler(Looper.getMainLooper(),message,responser);
+                    mHandler.sendEmptyMessage(0);
                     break;
                 case NEWTHREAD:
                     new Thread(new SCNewThread(responser,message)).start();
                     break;
+                case POSTTHREAD:
+                    mHandler = SCHandlerFactory.createHandler(message.getLooper(),message,responser);
+                    mHandler.sendEmptyMessage(0);
+                    break;
+
                 default: break;
             }
         }

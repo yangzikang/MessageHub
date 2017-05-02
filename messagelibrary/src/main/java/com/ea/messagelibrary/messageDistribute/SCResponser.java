@@ -1,5 +1,6 @@
 package com.ea.messagelibrary.messageDistribute;
 
+import android.os.Looper;
 import android.util.Log;
 
 import java.io.Serializable;
@@ -14,9 +15,10 @@ import java.util.Map;
  * 响应者类，维护一个静态的MAP，用来存放它的对象
  */
 
-public abstract class SCResponser implements Serializable{
+public abstract class SCResponser{
     private String tagName;
     private SCThreadModeType threadModeType;
+    private Looper looper;
 
 
     public static Map<String , SCResponser> relationShip = new HashMap<>();

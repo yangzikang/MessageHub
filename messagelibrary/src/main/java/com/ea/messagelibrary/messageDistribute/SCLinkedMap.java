@@ -5,7 +5,8 @@ package com.ea.messagelibrary.messageDistribute;
  * 轻量级Map用于解决Map过重的问题
  * 用键值对的结构体链表来代替Map
  *
- * 缺点是无法实现，一key多值
+ * 降低了查找的速度
+ * 因为携带数据量并不大，所以不必做哈希算法
  */
 
 public class SCLinkedMap {
