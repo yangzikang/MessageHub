@@ -14,12 +14,20 @@ public class SCMessage{
     private SCLinkedMap parameters;          //携带的数据
     private String      tag;
     private Looper      looper;
+    private boolean     sticky;
 
     public SCLinkedMap getParameters(){
         return parameters;
     }
     public String getTag(){return tag;}
     public Looper getLooper(){return looper;}
+
+    public void setSticky(boolean sticky){
+        this.sticky = sticky;
+    }
+    public boolean getSticky(){
+        return sticky;
+    }
     /**
      * 构造函数
      */
@@ -33,6 +41,7 @@ public class SCMessage{
         this.tag = tag;
         this.parameters = parameters;
         this.looper = Looper.myLooper();
+        sticky = false;
     }
 
 }

@@ -18,7 +18,7 @@ import java.util.Map;
 public abstract class SCResponser{
     private String tagName;
     private SCThreadModeType threadModeType;
-    private Looper looper;
+
 
 
     public static Map<String , SCResponser> relationShip = new HashMap<>();
@@ -26,6 +26,7 @@ public abstract class SCResponser{
     public SCThreadModeType getThreadModeType(){
         return threadModeType;
     }
+
 
     public void register(Object receiver){
         Class<?> clazz = receiver.getClass();

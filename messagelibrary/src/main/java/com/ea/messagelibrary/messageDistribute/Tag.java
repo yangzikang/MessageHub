@@ -7,5 +7,6 @@ import java.lang.annotation.*;
 
 public @interface Tag {
     public String tag() default "";
+
 	public SCThreadModeType threadMode() default SCThreadModeType.MAINTHREAD;
 }

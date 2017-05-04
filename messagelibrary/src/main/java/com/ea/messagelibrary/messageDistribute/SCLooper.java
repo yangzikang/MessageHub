@@ -46,7 +46,9 @@ public class SCLooper implements Runnable{
         Handler mHandler;
         SCResponser responser = SCResponser.relationShip.get(message.getTag());
         if (responser==null){
-            SCMessageQueue.add(message);
+            if(message.getSticky()){
+                SCMessageQueue.add(message);
+            }
         }
         else{
             switch(responser.getThreadModeType()){

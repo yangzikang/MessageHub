@@ -7,3 +7,4 @@ package com.ea.messagelibrary.messageDistribute;
 public enum SCThreadModeType {
     MAINTHREAD,POSTTHREAD,NEWTHREAD;
 }
+

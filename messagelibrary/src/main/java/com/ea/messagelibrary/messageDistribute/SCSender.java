@@ -28,10 +28,16 @@ public class SCSender{
         enqueueMessage(message);
     }
 
+
+    public static void sendStickyMessage(String tag,SCLinkedMap parameters){
+        SCMessage message = createMessage(tag,parameters);
+        message.setSticky(true);
+        enqueueMessage(message);
+    }
+
     private static SCMessage createMessage(String tag, SCLinkedMap parameters){
         //做一下线程选择
         //还未实现
-
         return SCMessageFactory.createMessage(tag,parameters);
 
     }
